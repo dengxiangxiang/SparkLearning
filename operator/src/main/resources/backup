@@ -1,0 +1,14 @@
+    bin/spark-submit \
+    --class fullNameOfMain \
+    --master yarn \
+    --deploy-mode client \
+    --executor-cores 3  \
+    *.jar params... \
+
+        bin/spark-submit \
+        --class WordCount \
+        --master yarn \
+        --deploy-mode client \
+        --executor-cores 3  \
+        /tmp/data/WordCount-jar-with-dependencies.jar  \
+        yarn  hdfs://hadoop-00:8020/data/input/README.md file:///tmp/data/output1 \
