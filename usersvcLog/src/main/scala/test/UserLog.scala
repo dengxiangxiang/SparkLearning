@@ -1,9 +1,11 @@
+package test
+
 import java.sql.Date
 import java.text.SimpleDateFormat
 
-import org.apache.spark.sql.{SaveMode, SparkSession}
 import org.apache.spark.sql.expressions.UserDefinedFunction
 import org.apache.spark.sql.functions.{col, concat_ws, get_json_object, udf}
+import org.apache.spark.sql.{SaveMode, SparkSession}
 
 object UserLog {
   def main(args: Array[String]): Unit = {
