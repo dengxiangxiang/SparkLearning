@@ -1,0 +1,12 @@
+1 this project is aimed at processing usersvc log data in specific position(AWS S3), including dailyBriefData and dailyRegisterData.
+Typically, we may once process data for a total month with many spark application orderly.Use October as an example,steps are described as follows:
+
+    a. For each day of a month, (for example October 2020, we have  2020-10-01,2020-10-02,..2020-10-30, 30 days in all)
+we start a userlog_daily_process.sh job to parse usersvc origin log data of this day, and as result we get dailyBriefData file and dailyRegisterData file stored in some temp position.
+In this step, we will run 30(for October) spark applications.
+
+    b.1 In this step, we start a userlog_monthly_brief_data_process job to collect dailyBriefData of all the days in October,
+then we need two result, one is to Aggregate them as a text file, output it; another is to join with application_product message and output it as json file
+
+    b.2 In this step, we start a userlog_monthly_register_data_process job to collect dailyRegisterData of all the days in October,
+then we need two result, one is to Aggregate them as a text file, output it; another is to join with application_product message and output it as json file
