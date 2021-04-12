@@ -165,7 +165,7 @@ object UserUtils {
   }
 
 
-  private def getDaysByYearMonth(year: Int, month: Int): Array[String]
+  def getDaysByYearMonth(year: Int, month: Int): Array[String]
 
   = {
     val dateFormat = "%04d-%02d-%02d"

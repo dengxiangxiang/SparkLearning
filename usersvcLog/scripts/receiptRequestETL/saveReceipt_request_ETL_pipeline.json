@@ -1,0 +1,88 @@
+{
+  "objects": [{
+    "subnetId": "subnet-1bb83572",
+    "maximumRetries": "0",
+    "enableDebugging": "true",
+    "name": "EmrCluster1",
+    "coreInstanceType": "m5.2xlarge",
+    "coreInstanceCount": "2",
+    "id": "EmrClusterId_kFXqS",
+    "masterInstanceType": "m5.2xlarge",
+    "releaseLabel": "emr-5.16.0",
+    "type": "EmrCluster",
+    "terminateAfter": "12 Hours",
+    "applications": "spark"
+  },
+    {
+      "scriptUri": "s3://umsstats/saveReceiptRequest/scripts/setup_env.sh",
+      "maximumRetries": "0",
+      "name": "EMR Resource Copy to Host",
+      "runsOn": {
+        "ref": "EmrClusterId_kFXqS"
+      },
+      "id": "EmrActivityId_fBwJp",
+      "type": "ShellCommandActivity"
+    },
+    {
+      "failureAndRerunMode": "CASCADE",
+      "resourceRole": "DataPipelineDefaultResourceRole",
+      "role": "DataPipelineDefaultRole",
+      "pipelineLogUri": "s3://umsstats/saveReceiptRequest/logs/",
+      "scheduleType": "ONDEMAND",
+      "name": "Default",
+      "id": "Default"
+    },
+    {
+      "dependsOn": {
+        "ref": "EmrActivityId_fBwJp"
+      },
+      "scriptUri": "s3://umsstats/saveReceiptRequest/scripts/saveReceipt_request_ETL.sh",
+      "name": "saveReceipt_request_ETL",
+      "runsOn": {
+        "ref": "EmrClusterId_kFXqS"
+      },
+      "scriptArgument": [
+        "#{myINPUT_DIR}",
+        "#{myOUTPUT_DIR}",
+        "#{myDATE}",
+        "#{myIS_LOCAL_FILE}",
+        "#{myIS_LOCAL_RUNNING}"
+      ],
+      "id": "ShellCommandActivityId_JXl6f",
+      "type": "ShellCommandActivity"
+    }
+  ],
+  "parameters": [{
+    "default": "false",
+    "id": "myIS_LOCAL_RUNNING",
+    "type": "String"
+  },
+    {
+      "default": "s3://umsstats/saveReceiptRequest/output/",
+      "id": "myOUTPUT_DIR",
+      "type": "String"
+    },
+    {
+      "default": "true",
+      "id": "myIS_LOCAL_FILE",
+      "type": "String"
+    },
+    {
+      "default": "2019-10-07",
+      "id": "myDATE",
+      "type": "String"
+    },
+    {
+      "default": "s3://umsstats/saveReceiptRequest/input/",
+      "id": "myINPUT_DIR",
+      "type": "String"
+    }
+  ],
+  "values": {
+    "myOUTPUT_DIR": "s3://umsstats/saveReceiptRequest/output/202010/daily",
+    "myDATE": "2020-10-01,2020-10-02,2020-10-03,2020-10-04,2020-10-05,2020-10-06,2020-10-07,2020-10-08,2020-10-09,2020-10-10,2020-10-11,2020-10-12,2020-10-13,2020-10-14,2020-10-15,2020-10-16,2020-10-17,2020-10-18,2020-10-19,2020-10-20,2020-10-21,2020-10-22,2020-10-23,2020-10-24,2020-10-25,2020-10-26,2020-10-27,2020-10-28,2020-10-29,2020-10-30,2020-10-31",
+    "myIS_LOCAL_FILE": "false",
+    "myIS_LOCAL_RUNNING": "false",
+    "myINPUT_DIR": "s3://umsstats/saveReceiptRequest/input"
+  }
+}

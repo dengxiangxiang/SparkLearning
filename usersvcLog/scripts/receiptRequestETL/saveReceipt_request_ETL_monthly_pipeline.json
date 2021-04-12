@@ -1,0 +1,74 @@
+{
+  "objects": [{
+    "subnetId": "subnet-1bb83572",
+    "maximumRetries": "0",
+    "enableDebugging": "true",
+    "name": "EmrCluster1",
+    "coreInstanceType": "m5.2xlarge",
+    "coreInstanceCount": "2",
+    "id": "EmrClusterId_kFXqS",
+    "masterInstanceType": "m5.2xlarge",
+    "releaseLabel": "emr-5.16.0",
+    "type": "EmrCluster",
+    "terminateAfter": "12 Hours",
+    "applications": "spark"
+  },
+    {
+      "scriptUri": "s3://umsstats/saveReceiptRequest/scripts/setup_env.sh",
+      "maximumRetries": "0",
+      "name": "EMR Resource Copy to Host",
+      "runsOn": {
+        "ref": "EmrClusterId_kFXqS"
+      },
+      "id": "EmrActivityId_fBwJp",
+      "type": "ShellCommandActivity"
+    },
+    {
+      "failureAndRerunMode": "CASCADE",
+      "resourceRole": "DataPipelineDefaultResourceRole",
+      "role": "DataPipelineDefaultRole",
+      "pipelineLogUri": "s3://umsstats/saveReceiptRequest/logs/",
+      "scheduleType": "ONDEMAND",
+      "name": "Default",
+      "id": "Default"
+    },
+    {
+      "dependsOn": {
+        "ref": "EmrActivityId_fBwJp"
+      },
+      "scriptUri": "s3://umsstats/saveReceiptRequest/scripts/saveReceipt_request_ETL_monthly.sh",
+      "name": "saveReceipt_request_ETL_monthly",
+      "runsOn": {
+        "ref": "EmrClusterId_kFXqS"
+      },
+      "scriptArgument": [
+        "#{myINPUT_DIR}",
+        "#{myOUTPUT_DIR}",
+        "#{myIS_LOCAL_RUNNING}"
+      ],
+      "id": "ShellCommandActivityId_JXl6f",
+      "type": "ShellCommandActivity"
+    }
+  ],
+  "parameters": [{
+    "default": "false",
+    "id": "myIS_LOCAL_RUNNING",
+    "type": "String"
+  },
+    {
+      "default": "s3://umsstats/saveReceiptRequest/output/",
+      "id": "myOUTPUT_DIR",
+      "type": "String"
+    },
+    {
+      "default": "s3://umsstats/saveReceiptRequest/input/",
+      "id": "myINPUT_DIR",
+      "type": "String"
+    }
+  ],
+  "values": {
+    "myOUTPUT_DIR": "s3://umsstats/saveReceiptRequest/output/202010/monthlySum",
+    "myIS_LOCAL_RUNNING": "false",
+    "myINPUT_DIR": "s3://umsstats/saveReceiptRequest/output/202010/daily/*/part-*"
+  }
+}

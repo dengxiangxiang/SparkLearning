@@ -22,7 +22,7 @@ object StateStream {
 
 
     val stateDS: DStream[(String, Int)] = wordCountStreams.updateStateByKey {
-      case (seq: Seq[Int], s) => {
+       (seq: Seq[Int], s) => {
         val sum: Int = s.getOrElse(0) + seq.foldLeft(0)(_+_)
         Option(sum)
       }

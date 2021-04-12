@@ -40,14 +40,26 @@
         </configuration>
       </plugin>
       <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.4</version>
+        <executions>
+          <execution>
+            <id>assemble-all</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
           <archive>
             <manifest>
-              <addClasspath>true</addClasspath>
-              <mainClass>userlog.UserLogAnalysis</mainClass>
+              <mainClass>userlog.UserLogDailyProcess</mainClass>
             </manifest>
           </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
         </configuration>
       </plugin>
       <plugin>
@@ -150,10 +162,6 @@
         <exclusion>
           <artifactId>jsr305</artifactId>
           <groupId>com.google.code.findbugs</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>slf4j-api</artifactId>
-          <groupId>org.slf4j</groupId>
         </exclusion>
         <exclusion>
           <artifactId>jul-to-slf4j</artifactId>
@@ -454,10 +462,6 @@
         <exclusion>
           <artifactId>jets3t</artifactId>
           <groupId>net.java.dev.jets3t</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>slf4j-api</artifactId>
-          <groupId>org.slf4j</groupId>
         </exclusion>
         <exclusion>
           <artifactId>slf4j-log4j12</artifactId>
