@@ -19,6 +19,39 @@
             <artifactId>spark-core_${scala-version}</artifactId>
             <version>${spark-version}</version>
         </dependency>
+
+<!--        mysql-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.42</version>
+        </dependency>
+
+<!--        redis-->
+        <!-- https://mvnrepository.com/artifact/com.redislabs/spark-redis -->
+        <dependency>
+            <groupId>com.redislabs</groupId>
+            <artifactId>spark-redis_2.11</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+
+
+<!--        es-->
+        <!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch-spark-20 -->
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch-spark-20_2.11</artifactId>
+            <version>6.5.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.elasticsearch/elasticsearch-hadoop -->
+<!--        <dependency>-->
+<!--            <groupId>org.elasticsearch</groupId>-->
+<!--            <artifactId>elasticsearch-hadoop</artifactId>-->
+<!--            <version>6.5.0</version>-->
+<!--        </dependency>-->
+
+
     </dependencies>
 
     <build>

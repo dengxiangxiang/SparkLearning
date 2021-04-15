@@ -15,14 +15,15 @@ object PatitionBy {
 
     partitionedRdd.saveAsTextFile("data/output")
   }
+  class MyPatitioner(patitionNum: Int) extends Partitioner {
+    override def numPartitions: Int = {
+      patitionNum
+    }
+
+    override def getPartition(key: Any): Int = {
+      1
+    }
+  }
 }
 
-class MyPatitioner(patitionNum: Int) extends Partitioner {
-  override def numPartitions: Int = {
-    patitionNum
-  }
 
-  override def getPartition(key: Any): Int = {
-    1
-  }
-}
