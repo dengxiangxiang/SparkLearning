@@ -8,9 +8,15 @@
     <artifactId>sparkstreaming</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <parent>
+        <groupId>com.dxx</groupId>
+        <artifactId>sparkParent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <properties>
-        <scala-version>2.12</scala-version>
-        <spark-version>3.0.0</spark-version>
+        <scala-version>2.11</scala-version>
+        <spark-version>2.3.0</spark-version>
     </properties>
 
     <dependencies>
@@ -32,7 +38,7 @@
 
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming-kafka-0-10_${scala-version}</artifactId>
+            <artifactId>spark-streaming-kafka-0-8_${scala-version}</artifactId>
             <version>${spark-version}</version>
         </dependency>
     </dependencies>

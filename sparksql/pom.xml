@@ -8,6 +8,12 @@
     <artifactId>sparksql</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <parent>
+        <groupId>com.dxx</groupId>
+        <artifactId>sparkParent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <properties>
         <java.version>1.8</java.version>
         <scala.version>2.11.8</scala.version>

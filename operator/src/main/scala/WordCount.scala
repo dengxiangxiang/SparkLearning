@@ -23,6 +23,7 @@ object WordCount {
     val kvs: RDD[(String, Int)] = lines.repartition(4).flatMap(_.split(" ")).map((_,1)).reduceByKey(_+_)
 
     kvs.coalesce(1).saveAsTextFile(output)
+    kvs.checkpoint()
 
     System.in.read()
 
