@@ -22,18 +22,25 @@ object StateStream {
 
 
     val stateDS: DStream[(String, Int)] = wordCountStreams.updateStateByKey {
-       (seq: Seq[Int], s) => {
-        val sum: Int = s.getOrElse(0) + seq.foldLeft(0)(_+_)
+      (seq: Seq[Int], s) => {
+        val sum: Int = s.getOrElse(0) + seq.foldLeft(0)(_ + _)
         Option(sum)
       }
     }
 
 
-    stateDS.print()
+    val stateDS2: DStream[(String, Int)] = wordCountStreams.updateStateByKey(updateFunc)
+    stateDS2.print()
 
     streamingContext.start()
 
     streamingContext.awaitTermination()
 
   }
+
+  def updateFunc(seq: Seq[Int], s: Option[Int]): Option[Int] = {
+    val res: Int = s.getOrElse(0) + seq.reduce(_ + _)
+    Option(res)
+  }
+
 }

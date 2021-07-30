@@ -1,6 +1,6 @@
 package com.dxx.receiver
 
-import java.io.{BufferedInputStream, BufferedReader, InputStream, InputStreamReader}
+import java.io.{BufferedReader, InputStream, InputStreamReader}
 import java.net.Socket
 
 import org.apache.spark.storage.StorageLevel

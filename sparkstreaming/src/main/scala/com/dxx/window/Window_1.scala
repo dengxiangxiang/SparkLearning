@@ -1,4 +1,4 @@
-package com.dxx.stateful.window
+package com.dxx.window
 
 import org.apache.spark.{HashPartitioner, SparkConf, SparkContext}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
@@ -18,6 +18,9 @@ object Window_1 {
     val wordCountStreams: DStream[(String, Int)] = lineStreams
       .flatMap(_.split(" "))
       .map((_, 1))
+
+    val windowStream: DStream[(String, Int)] = wordCountStreams.window(Seconds(9),Seconds(9))
+    val wordCountsStream: DStream[(String, Int)] = windowStream.reduceByKey(_+_)
 
     val countStream1: DStream[(String, Int)] = wordCountStreams.reduceByKeyAndWindow(
       (x: Int, y: Int) => x + y,
