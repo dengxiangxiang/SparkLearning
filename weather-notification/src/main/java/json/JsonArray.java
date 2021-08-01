@@ -1,4 +1,4 @@
-package common.json;
+package json;
 
 import org.json.JSONArray;
 import org.json.JSONException;
