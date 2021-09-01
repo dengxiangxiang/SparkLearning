@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <artifactId>sparkParent</artifactId>
+    <groupId>com.dxx</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>spark</groupId>
   <artifactId>usersvcLog</artifactId>
@@ -287,6 +292,38 @@
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
+      <artifactId>spark-yarn_2.11</artifactId>
+      <version>2.3.0</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>hadoop-yarn-api</artifactId>
+          <groupId>org.apache.hadoop</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>hadoop-yarn-common</artifactId>
+          <groupId>org.apache.hadoop</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>hadoop-yarn-server-web-proxy</artifactId>
+          <groupId>org.apache.hadoop</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>hadoop-yarn-client</artifactId>
+          <groupId>org.apache.hadoop</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>hadoop-client</artifactId>
+          <groupId>org.apache.hadoop</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>unused</artifactId>
+          <groupId>org.spark-project.spark</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
       <artifactId>spark-sql_2.11</artifactId>
       <version>2.3.0</version>
       <scope>provided</scope>
@@ -330,6 +367,22 @@
         <exclusion>
           <artifactId>xbean-asm5-shaded</artifactId>
           <groupId>org.apache.xbean</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>unused</artifactId>
+          <groupId>org.spark-project.spark</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-streaming_2.11</artifactId>
+      <version>2.3.0</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>spark-tags_2.11</artifactId>
+          <groupId>org.apache.spark</groupId>
         </exclusion>
         <exclusion>
           <artifactId>unused</artifactId>
@@ -513,7 +566,7 @@
   <properties>
     <scala.version>2.11.8</scala.version>
     <java.version>1.8</java.version>
-    <scala.binary.version>2.11</scala.binary.version>
+    <scala.binary.version>2.1</scala.binary.version>
     <jackson.version>2.9.8</jackson.version>
     <hadoop.version>2.7.0</hadoop.version>
     <spark.version>2.3.0</spark.version>
