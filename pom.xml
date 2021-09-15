@@ -19,6 +19,7 @@
         <module>sparkstreaming</module>
         <module>structuredstreaming</module>
         <module>weather-notification</module>
+        <module>radarmap</module>
     </modules>
 
     <properties>
